@@ -1,0 +1,86 @@
+
+.app-wrapper {
+    /* background : url('./media/background.jpg') no-repeat; */
+    
+  background-size: cover;
+    background-position: center;
+  min-height: 100vh; /* Ensures that the background covers the entire viewport height */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.Db{
+  padding: 20px;
+  margin-top: 100px;
+}
+
+.dash1{
+  display: flex;
+  gap: 20px;
+}
+
+.text1{
+text-decoration: none;
+color: yellow;
+}
+.text2{
+text-decoration: none;
+color: yellow;
+}
+
+.upload_project{
+  padding: 30px;
+  background: linear-gradient(blue, pink);
+}
+.see_student_list{
+  padding: 30px;
+  background: linear-gradient(blue, 10%, pink);
+}
+
+.upload{
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  padding-left: 35%;
+  padding-top: 5%;
+  gap: 25px;
+}
+
+.sp{
+  padding-right: 15px;
+
+}
+
+.custom-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+}
+
+.upload-cont{
+  display: flex;
+  /* justify-content: center; */
+  gap: 10px;
+}
+
+.desc{
+  height: 100px;
+  width: 200px;
+}
+
+.pname{
+  width: 242px;
+}
+.pstrength{
+  width: 225px;
+}
