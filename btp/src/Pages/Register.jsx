@@ -26,7 +26,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(isProfessor){
-     await axios.post('http://localhost:4000/api/auth/registerProfessor', {
+     await axios.post('http://10.10.120.28/api/auth/registerProfessor', {
         email:email,
         name:'professor',
         password:password
@@ -41,7 +41,7 @@ export default function Register() {
       });
     }
     else{
-      await axios.post('http://localhost:4000/api/auth/registerStudent', {
+      await axios.post('http://10.10.120.28/api/auth/registerStudent', {
         email:email,
         sname:'Rahul',
         spassword:password
