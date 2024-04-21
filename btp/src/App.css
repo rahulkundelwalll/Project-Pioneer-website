@@ -22,20 +22,20 @@
 
 .text1{
 text-decoration: none;
-color: yellow;
+color: white;
 }
 .text2{
 text-decoration: none;
-color: yellow;
+color: white;
 }
 
 .upload_project{
   padding: 30px;
-  background: linear-gradient(blue, pink);
+  background-color: rgb(23, 81, 226);
 }
 .see_student_list{
   padding: 30px;
-  background: linear-gradient(blue, 10%, pink);
+  background-color: rgb(233, 186, 98);
 }
 
 .upload{
