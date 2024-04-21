@@ -39,7 +39,7 @@ export default function Login() {
           password: password
         });
         // console.log(res.data.user);
-        if (res && res.data.success) {
+        if (res && res.data.user) {
 
           // console.log(res.data.token);
           toast.success("Login succesfully");
@@ -66,10 +66,9 @@ export default function Login() {
           email: email,
           password: password
         });
-        // console.log(res.data.user);
-        if (res && res.data.success) {
+        if (res && res.data.user) {
 
-          // console.log(res.data.token);
+          // console.log(res.data.user);
           toast.success("Login succesfully");
           setAuth({
             ...auth,
@@ -77,7 +76,7 @@ export default function Login() {
             token: res.data.token,
           });
           localStorage.setItem('auth', JSON.stringify(res.data));
-          navigate("/faculty/dashboard")
+          navigate("/student/dashboard")
           console.log(auth);
         }
         else {
