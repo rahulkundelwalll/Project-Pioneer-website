@@ -38,14 +38,14 @@ color: white;
   background-color: rgb(233, 186, 98);
 }
 
-.upload{
+/* .upload{
   display: flex;
   flex-direction: column;
   max-width: fit-content;
   padding-left: 35%;
   padding-top: 5%;
   gap: 25px;
-}
+} */
 
 .sp{
   padding-right: 15px;

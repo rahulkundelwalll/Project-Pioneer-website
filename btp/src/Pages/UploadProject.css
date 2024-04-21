@@ -5,6 +5,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: rgb(255, 255, 255); /* Added background color */
 }
 
 .upload-content {
@@ -22,6 +23,10 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.upload-textarea { /* Changed class name to match textarea */
+    resize: vertical; /* Allow vertical resizing of textarea */
 }
 
 .upload-button {

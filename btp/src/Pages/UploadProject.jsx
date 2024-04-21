@@ -1,15 +1,42 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './UploadProject.css'; // Import your CSS file for styling
+import axios from 'axios';
+import './UploadProject.css'
 
 function UploadProject() {
     const [ProjectName, setProjectName] = useState("");
     const [ProjectDesc, setProjectDesc] = useState("");
     const [ProjectStrength, setProjectStrength] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-        navigate('/faculty/dashboard');
+    const handleSubmit = async () => {
+        const apiUrl = 'http://10.10.120.28/api/projects/addProject';
+
+        const data = {
+            name: ProjectName,
+            description: ProjectDesc,
+            strength: ProjectStrength
+        };
+
+        const responseDataObj = JSON.parse(localStorage.auth);
+        const token = responseDataObj.token
+        console.log(token)
+
+        try {
+            const response = await axios.post(apiUrl, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log("API call successful:", response.data);
+            navigate('/faculty/dashboard');
+        } catch (error) {
+            console.error("API call failed:", error);
+            // Handle error here
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -27,10 +54,10 @@ function UploadProject() {
             <div className='upload-content'>
                 <span className='upload-label'>Enter Project Description:</span>
                 <textarea
+                    className='upload-input'
                     value={ProjectDesc}
                     onChange={(e) => setProjectDesc(e.target.value)}
                     placeholder='Type Project Description'
-                    className='upload-textarea desc'
                 />
             </div>
             <div className='upload-content'>
