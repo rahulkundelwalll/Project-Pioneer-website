@@ -34,7 +34,7 @@ export default function Login() {
     e.preventDefault();
     if (isProfessor) {
       try {
-        const res = await axios.post('http://localhost:4000/api/auth/loginProfessor', {
+        const res = await axios.post('http://10.10.120.28/api/auth/loginProfessor', {
           email: email,
           password: password
         });
@@ -62,7 +62,7 @@ export default function Login() {
     }
     else {
       try {
-        const res = await axios.post('http://localhost:4000/api/auth/loginStudent', {
+        const res = await axios.post('http://10.10.120.28/api/auth/loginStudent', {
           email: email,
           password: password
         });
