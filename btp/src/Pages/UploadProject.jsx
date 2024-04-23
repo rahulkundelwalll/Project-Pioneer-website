@@ -11,17 +11,20 @@ function UploadProject() {
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
+        const responseDataObj = JSON.parse(localStorage.auth);
+        const token = responseDataObj.token
+        const professorName = responseDataObj.user.pname
+
         const apiUrl = 'http://10.10.120.28/api/projects/addProject';
 
         const data = {
             name: ProjectName,
             description: ProjectDesc,
-            strength: ProjectStrength
+            strength: ProjectStrength,
+            professorName:professorName,
         };
 
-        const responseDataObj = JSON.parse(localStorage.auth);
-        const token = responseDataObj.token
-        console.log(token)
+        console.log(data)
 
         try {
             const response = await axios.post(apiUrl, data, {

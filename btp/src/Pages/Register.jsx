@@ -6,10 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 export default function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isProfessor, setIsProfessor] = useState(false);
   const navigate = useNavigate()
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -28,7 +33,7 @@ export default function Register() {
     if(isProfessor){
      await axios.post('http://10.10.120.28/api/auth/registerProfessor', {
         email:email,
-        name:'professor',
+        pname:name,
         password:password
       })
       .then(function (response) {
@@ -43,7 +48,7 @@ export default function Register() {
     else{
       await axios.post('http://10.10.120.28/api/auth/registerStudent', {
         email:email,
-        sname:'Rahul',
+        sname:name,
         spassword:password
       })
       .then(function (response) {
@@ -67,6 +72,15 @@ export default function Register() {
       <ToastContainer />
       <form onSubmit={handleSubmit}>
         <h2>Register</h2>
+        <div className="form-group">
+          <input
+            type="name"
+            placeholder="Username"
+            value={name}
+            onChange={handleNameChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <input
             type="email"

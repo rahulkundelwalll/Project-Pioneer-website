@@ -38,7 +38,7 @@ function ProjectList() {
             <tr key={index}>
               <td>{project.pname}</td>
               <td>{project.description}</td>
-              <td>{project.professor}</td>
+              <td>{project.professorName}</td>
               <td>{project.professor}</td>
               <td>{project.strength}</td>
             </tr>
