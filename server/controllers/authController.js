@@ -89,14 +89,14 @@ const updateStudent = async (req, res) => {
 };
 
 const registerProfessor = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, pname, password } = req.body;
 
   const saltRounds = 10; // adjust as needed
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   try {
     const query = `INSERT INTO Professor (email, pname, ppassword) VALUES (?, ?, ?)`;
-    const values = [email, name, hashedPassword];
+    const values = [email, pname, hashedPassword];
 
     await connection.query(query, values);
     res.status(201).json({ message: "Professor registered successfully" });

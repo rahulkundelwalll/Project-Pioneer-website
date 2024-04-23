@@ -13,10 +13,10 @@ const addProject = async (req, res) => {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       const professorEmail = decodedToken.email;
   
-      const { name, strength } = req.body;
+      const { name, strength,professorName,description } = req.body;
   
       // Add project with professor email retrieved from token
-      await connection.execute('INSERT INTO Projects (pname, professor, strength) VALUES (?, ?, ?)', [name, professorEmail, strength]);
+      await connection.execute('INSERT INTO Projects (pname, professor, strength,description,professorName) VALUES (?,?,?,?,?)', [name, professorEmail, strength,description,professorName]);
   
       res.status(201).json({ message: 'Project added successfully!' });
     } catch (error) {

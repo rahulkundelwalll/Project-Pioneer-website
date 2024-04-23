@@ -1,4 +1,4 @@
-import express from "express"
+import express from 'express'
 import dotenv from 'dotenv'
 import mysql from 'mysql2/promise'
 import morgan from 'morgan'
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 const config = {
     host: 'localhost',
     user: 'root',
-    password: 'kamla',
+    password: 'harsh@mysql',
     database: 'dip',
 };
 
@@ -60,7 +60,4 @@ const start = async () => {
 }
 start();
 
-export {connection}
-
-
-
+export {connection} 
