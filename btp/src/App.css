@@ -18,6 +18,14 @@
 .dash1{
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width:1100px) {
+  .dash1{
+      flex: 1 0 35%;
+      min-height: 40vh;
+  }
 }
 
 .text1{
