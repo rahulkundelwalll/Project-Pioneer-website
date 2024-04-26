@@ -1,32 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
 const Footer = () => {
-  const footerStyle = {
-    backgroundColor: "#003f87",
-    color: "#ecf0f1",
-    padding: "20px",
-    textAlign: "center",
-    position: "fixed",
-    bottom: 0,
-    left: 0,
-    width: "100%",
-  };
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
-  const textStyle = {
-    margin: "8px 0",
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPosition = window.pageYOffset;
+      setIsVisible(lastScrollPosition > currentScrollPosition || currentScrollPosition < 10);
+      // console.log((lastScrollPosition > currentScrollPosition || currentScrollPosition < 10));
+      setLastScrollPosition(currentScrollPosition);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollPosition]);
 
   return (
-    <div style={footerStyle}>
-      <h6 style={textStyle}>IIT JAMMU</h6>
-      <p style={textStyle}>
-        NH-44, PO Nagrota, Jagti, Jammu and Kashmir 181221 | Phone: 0191 257 0381 | Email: cif@iitjammu.ac.in
-      </p>
-      <div style={{ marginTop: "10px" }}>
-        <p style={textStyle}>&copy; 2020 IIT Jammu. All rights reserved.</p>
+    <footer
+      style={{
+        position: 'fixed',
+        left: 0,
+        bottom: isVisible ? 0 : '-100px',
+        width: '100%',
+        backgroundColor: '#003f87',
+        color: '#fff',
+        padding: '20px',
+        textAlign: 'center',
+        transition: 'bottom 0.3s ease-in-out',
+        zIndex: 9999 // Adjust z-index as needed
+      }}
+    >
+      <div>
+        NH-44, PO Nagrota, Jagti, Jammu and Kashmir 181221 | Phone: 0191 257 0381 | Email: <a href="mailto:cif@iitjammu.ac.in" style={{ color: '#fff' }}>cif@iitjammu.ac.in</a>
       </div>
-    </div>
+      <div>
+        &copy;2020 IIT Jammu. All rights reserved.
+      </div>
+    </footer>
   );
-};
+}
 
 export default Footer;
