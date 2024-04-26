@@ -21,6 +21,12 @@ function Dashboard1() {
 
                     </div>
                 </Link>
+                <Link to="/student/allottedProject" className='text2'>
+                    <div className='alloted_project'>
+                        Allotted Project
+
+                    </div>
+                </Link>
             </div>
         </div>
     )

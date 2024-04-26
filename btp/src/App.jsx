@@ -13,6 +13,7 @@ import UploadProject from './Pages/UploadProject';
 import StudentList from './Pages/StudentList';
 import Preferences from './Pages/Preferences';
 import ProjectList from './Pages/ProjectList';
+import AllotedProject from './Pages/AllottedProject';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/student/projectList' element={<ProjectList />} />
           <Route path='/student/preferences' element={<Preferences />} />
           <Route path='/student/dashboard' element={<Dashboard2 />} />
+          <Route path='/student/allottedProject' element={<AllotedProject />} />
           <Route path="/" element={<Hero />} />
           <Route path="/dept" element={<Department />} />
           <Route path="/project" element={<Pagination />} />
