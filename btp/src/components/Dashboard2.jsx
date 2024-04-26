@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/auth'
 
 function Dashboard1() {
+    const [auth, setAuth] = useAuth();
     return (
         <div className='Db'>
-            <h1>Hi User(Student)</h1>
+            <h1>Hi User {auth.user ? auth.user.sname : null}</h1>
             <br />
             <div className='dash1'>
 

@@ -90,13 +90,8 @@ const updateProject = async (req, res) => {
     }
   };
   
-export const project = async (req,res)=>{
+const project = async (req,res)=>{
   try {
-    
-
-  
-
-    
     const projec= await connection.query('SELECT * FROM Projects');
    
 
@@ -105,9 +100,29 @@ export const project = async (req,res)=>{
     console.error(error);
     res.status(500).json({ message: 'Error updating project.' });
   }
-
-
 }
 
-export {addProject,deleteProject,updateProject}
+const getStudentsByFaculty = async (req, res) => {
+  try {
+      // Extract email from JWT token
+      const authorizationHeader = req.headers.authorization;
+      if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+          return res.status(401).json({ message: 'Missing or invalid authorization token' });
+      }
+
+      const token = authorizationHeader.split(' ')[1];
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      const professorEmail = decodedToken.email;
+
+      // Get students assigned to projects of the faculty
+      const students = await connection.query('SELECT s.*, p.pname AS project_name FROM Student s LEFT JOIN Projects p ON s.assignedProject = p.project_id WHERE p.professor = ?', [professorEmail]);
+
+      res.status(200).json({ message: 'Students retrieved successfully!', students });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error retrieving students.' });
+  }
+};
+
+export { addProject, deleteProject, updateProject, project, getStudentsByFaculty };
 

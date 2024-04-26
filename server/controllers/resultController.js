@@ -20,22 +20,32 @@ const getResults = async (req, res) => {
     try {
         // Get students in descending order of CGPA
         const studentList = await connection.execute(
-            'SELECT email, cgpa, firstPreference, secondPreference, thirdPreference,assignedProject FROM Student WHERE assignedProject IS NULL ORDER BY cgpa DESC'
+            'SELECT email, cgpa, firstPreference, secondPreference, thirdPreference, assignedProject FROM Student WHERE assignedProject IS NULL ORDER BY cgpa DESC'
         );
+
         // Loop through students and assign projects
         for (const students of studentList) {
             for (const student of students) {
                 // Check available project preferences
-                const preferences = [student.firstPreference, student.secondPreference, student.thirdPreference];
-                // console.log(preferences)
+                const preferences = [
+                    student.firstPreference,
+                    student.secondPreference,
+                    student.thirdPreference
+                ];
 
-                for (const preference of preferences) {
+                // Fetch project IDs corresponding to project names
+                const projectIDs = await Promise.all(preferences.map(async (preference) => {
+                    const [project] = await connection.execute('SELECT project_id FROM Projects WHERE pname = ?', [preference]);
+                    return project[0].project_id;
+                }));
+
+                // Loop through project IDs to find available projects
+                for (const projectId of projectIDs) {
                     // Check if project has available slots
-                    const project = await connection.execute('SELECT * FROM Projects WHERE project_id = ?', [preference]);
-                    // console.log(project[0][0]);
-                    if (project[0][0].strength > 0) {
+                    const project = await connection.execute('SELECT * FROM Projects WHERE project_id = ? AND strength > 0', [projectId]);
+                    if (project[0].length > 0) {
                         await assignProject(student, project[0][0]);
-                        break;
+                        break; // Exit the loop once a project is assigned
                     }
                 }
             }
