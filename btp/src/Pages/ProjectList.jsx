@@ -7,6 +7,7 @@ function ProjectList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        
         const response = await axios.get('http://10.10.120.28/api/projects/project');
         // console.log(response.data.projec[0])
         setProjects(response.data.projec[0]);
