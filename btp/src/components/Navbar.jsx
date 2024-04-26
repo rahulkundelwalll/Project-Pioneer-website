@@ -5,9 +5,8 @@ import { useAuth } from '../context/auth'
 import { Link } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 
-
-
 export default function Navbar() {
+
   const [auth, setAuth] = useAuth();
   const handleLogout = () => {
     setAuth({
@@ -47,8 +46,8 @@ export default function Navbar() {
 
               <Link to="/register">Register</Link>
             </>) : (<>
-
-              <Link to="/faculty/dashboard">Dashboard</Link>
+              
+              <Link to={auth.user.sname ? "/student/dashboard" : "/faculty/dashboard"}>Dashboard</Link>
 
             </>)
           }
