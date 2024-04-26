@@ -37,6 +37,15 @@ color: white;
   padding: 30px;
   background-color: rgb(233, 186, 98);
 }
+.alloted_project{
+  padding: 30px;
+  background-color: rgb(24, 163, 26);
+}
+
+.alloted_cont{
+  margin-top: 120px;
+  margin-left: 30px;
+}
 
 /* .upload{
   display: flex;
