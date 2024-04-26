@@ -15,6 +15,7 @@ import Preferences from './Pages/Preferences';
 import ProjectList from './Pages/ProjectList';
 import AllotedProject from './Pages/AllottedProject';
 import Contact from './components/Contact';
+import AboutPage from './components/AboutPage';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/about" element={<AboutPage/>} />
           {/* <Route>path="/register"<Route/> */}
         </Routes>
         <Footer />
