@@ -57,6 +57,7 @@ export default function Login() {
         }
       }
       catch (err) {
+        toast.error("Wrong Credentials");
         console.log(err)
       }
     }
@@ -81,7 +82,7 @@ export default function Login() {
           // console.log(res.message);
         }
         else {
-          // toast.error(res.data.message);
+          toast.error("Wrong Credentials");
           // console.log(res.message);
 
         }
