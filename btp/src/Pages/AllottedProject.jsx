@@ -23,10 +23,10 @@ export default function AllotedProject() {
     <div className='alloted_cont'>
       {projectData ? (
         <>
-          <h3>Your Final Allotted Project: {projectData.name}</h3>
+          <h3>Your Final Allotted Project: <i className='italy'>{projectData.name}</i></h3>
           <br />
-          <h3>Faculty Name: {projectData.faculty.name}</h3>
-          <h3>Faculty Email: {projectData.faculty.email}</h3>
+          <h3>Faculty Name: <i className='italy'>{projectData.faculty.name}</i></h3>
+          <h3>Faculty Email: <i className='italy'>{projectData.faculty.email}</i></h3>
           <br />
           <h3>Team members:</h3>
           <table className="team-table">
