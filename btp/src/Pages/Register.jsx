@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css'; // Import CSS for styling
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -30,38 +30,42 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(isProfessor){
-     await axios.post('http://10.10.120.28/api/auth/registerProfessor', {
-        email:email,
-        pname:name,
-        password:password
+    if (isProfessor) {
+      await axios.post('http://10.10.120.28/api/auth/registerProfessor', {
+        email: email,
+        pname: name,
+        password: password
       })
-      .then(function (response) {
-        navigate("/login")
-        toast.success("Login succesfully");
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          toast.success("Login succesfully");
+          
+          navigate("/login")
+          // toast.success("Login succesfully");
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
-    else{
+    else {
       await axios.post('http://10.10.120.28/api/auth/registerStudent', {
-        email:email,
-        sname:name,
-        spassword:password
+        email: email,
+        sname: name,
+        spassword: password
       })
-      .then(function (response) {
-        toast.success("Login succesfully");
-        setTimeout(()=>3000)
-        navigate("/login")
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          toast.success("Login succesfully");
+          setTimeout(() => 3000)
+          navigate("/login")
+          toast.success("Login succesfully");
+          console.log(response);
+        })
+        .catch(function (error) {
+          toast.error("Wrong Credentials");
+          console.log(error);
+        });
     }
-    
+
     // Handle form submission here
     // toast.success("Register succesfully");
 
@@ -101,7 +105,7 @@ export default function Register() {
         </div>
         <div className="check">
           <label htmlFor="professorCheckbox">
-            Professor? 
+            Professor?
           </label>
           <input
             id="professorCheckbox"

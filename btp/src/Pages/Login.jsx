@@ -78,13 +78,18 @@ export default function Login() {
           localStorage.setItem('auth', JSON.stringify(res.data));
           navigate("/student/dashboard")
           console.log(auth);
+          // console.log(res.message);
         }
         else {
-          toast.error(res.data.message);
+          // toast.error(res.data.message);
+          // console.log(res.message);
+
         }
+
       }
       catch (err) {
-        console.log(err)
+        toast.error("Wrong Credentials");
+        console.log(err.message)
       }
     }
 
@@ -126,6 +131,7 @@ export default function Login() {
             onChange={handleCheckboxChange}
           />
         </div>
+        {/* <span>{res.data.message}</span> */}
         <div className="links">
           {/* <a href="#">Forgot Password?</a> */}
           <Link to="/register">Register</Link>
