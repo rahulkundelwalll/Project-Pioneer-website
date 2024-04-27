@@ -37,7 +37,7 @@ export default function Register() {
         password:password
       })
       .then(function (response) {
-        navigate("/dashboard/faculty")
+        navigate("/")
         toast.success("Login succesfully");
         console.log(response);
       })
