@@ -37,7 +37,7 @@ export default function Register() {
         password:password
       })
       .then(function (response) {
-        navigate("/")
+        navigate("/login")
         toast.success("Login succesfully");
         console.log(response);
       })
@@ -54,7 +54,7 @@ export default function Register() {
       .then(function (response) {
         toast.success("Login succesfully");
         setTimeout(()=>3000)
-        navigate("/dashboard/student")
+        navigate("/login")
         console.log(response);
       })
       .catch(function (error) {

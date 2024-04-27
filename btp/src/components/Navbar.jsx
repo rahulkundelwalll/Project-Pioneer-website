@@ -36,7 +36,7 @@ export default function Navbar() {
 
               <Link to="/login">Login</Link>
             </>) : (<>
-              <Link to="/home">{auth.user.pname ? (auth.user.pname) : (auth.user.sname)}</Link>
+              <Link to={auth.user.sname ? "/student/dashboard" : "/faculty/dashboard"}>{auth.user.pname ? (auth.user.pname) : (auth.user.sname)}</Link>
               <Link onClick={handleLogout} to="/login">Logout</Link>
 
             </>)

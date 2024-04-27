@@ -18,17 +18,19 @@ export default class Pagination extends Component {
   }
   receivedData() {
       axios
-          .get(`https://jsonplaceholder.typicode.com/photos`)
+          .get(`http://10.10.120.28/api/projects/project`)
           .then(res => {
 
-              const data = res.data;
-              
+              const data = res.data.projec[0];
+            //   console.log(data)
 
               const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
               
               const postData = slice.map(  pd => <div className='container'> <React.Fragment>
-                  <h2>{pd.title}</h2>
-                    <p>{pd.url}</p>
+                  <h2>{pd.pname}</h2>
+                    <p>{pd.description}</p>
+                    <p>{pd.professorName}</p>
+                    <p>{pd.strength}</p>
               </React.Fragment></div>)
 
               this.setState({
