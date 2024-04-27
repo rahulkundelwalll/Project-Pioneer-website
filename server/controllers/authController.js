@@ -141,4 +141,47 @@ const loginProfessor = async (req, res) => {
   }
 };
 
-export { registerStudent, loginStudent, updateStudent,registerProfessor,loginProfessor };
+const getAssignedProjectDetails = async (req, res) => {
+  const studentId = req.params.id;
+  try {
+    // Get student's assigned project
+    const [studentAssignedProject] = await connection.query('SELECT assignedProject FROM Student WHERE email = ?', [studentId]);
+
+    // Check if the student has been assigned a project
+    if (!studentAssignedProject || !studentAssignedProject.length || !studentAssignedProject[0].assignedProject) {
+      return res.status(404).json({ message: 'Student has not been assigned any project' });
+    }
+
+    const projectId = studentAssignedProject[0].assignedProject;
+
+    // Get project details
+    const [projectDetails] = await connection.query('SELECT * FROM Projects WHERE project_id = ?', [projectId]);
+
+    // Get faculty details
+    const [facultyDetails] = await connection.query('SELECT * FROM Professor WHERE email = ?', [projectDetails[0].professor]);
+
+    // Get other students allotted the same project
+    const [otherStudents] = await connection.query('SELECT s.email, s.sname FROM Student s WHERE s.assignedProject = ? AND s.email != ?', [projectId, studentId]);
+    console.log(projectDetails);
+    console.log(facultyDetails);
+    console.log(otherStudents);
+    res.status(200).json({
+      project: {
+        id: projectDetails[0].project_id,
+        name: projectDetails[0].pname,
+        description: projectDetails[0].description,
+        faculty: {
+          name: facultyDetails[0].pname,
+          email: facultyDetails[0].email
+        },
+        students: otherStudents.map(student => ({ email: student.email, name: student.sname }))
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching assigned project details' });
+  }
+};
+
+
+export { registerStudent, loginStudent, updateStudent,registerProfessor,loginProfessor,getAssignedProjectDetails };

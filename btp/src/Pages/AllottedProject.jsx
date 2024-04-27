@@ -1,43 +1,61 @@
-import React from 'react';
-import './al.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from '../context/auth'
+import './al.css';
 
 export default function AllotedProject() {
-  const ProjectName = "";  
-  const FacultyName = "";  
-  const FacultyEmail = "";  
-  const teamMembers = [
-    { sno: 1, name: "John Doe", email: "Developer" },
-    { sno: 2, name: "Jane Smith", email: "Designer" },
-    { sno: 3, name: "Mike Johnson", email: "QA Tester" }
-    // Add more team members as needed
-  ];
+  const [projectData, setProjectData] = useState(null);
+  const [auth, setAuth] = useAuth();
+  useEffect(() => {
+    // Fetch project data from API
+
+    axios.get(`http://10.10.120.28/api/auth/assignedProject/${auth.user.email}`)
+      .then(response => {
+        setProjectData(response.data.project);
+        console.log(projectData.students)
+      })
+      .catch(error => {
+        console.error('Error fetching project data:', error);
+      });
+  }, []);
 
   return (
     <div className='alloted_cont'>
-      <h3>Your Final Allotted Project: {ProjectName}</h3>
-      <br />
-      <h3>Faculty Name: {FacultyName}</h3>
-      <h3>Faculty Email: {FacultyEmail}</h3>
-      <br />
-      <h3>Team members:</h3>
-      <table className="team-table">
-        <thead>
-          <tr>
-            <th>S. No.</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {teamMembers.map(member => (
-            <tr key={member.sno}>
-              <td>{member.sno}</td>
-              <td>{member.name}</td>
-              <td>{member.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {projectData ? (
+        <>
+          <h3>Your Final Allotted Project: {projectData.name}</h3>
+          <br />
+          <h3>Faculty Name: {projectData.faculty.name}</h3>
+          <h3>Faculty Email: {projectData.faculty.email}</h3>
+          <br />
+          <h3>Team members:</h3>
+          <table className="team-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projectData.students ? projectData.students.map((member, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{member.name}</td>
+                  <td>{member.email}</td>
+                </tr>
+              )) : 
+              <tr key="999">
+                  <td>"NA"</td>
+                  <td>"NA"</td>
+                  <td>"NA"</td>
+                </tr>}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p>Loading project data...</p>
+      )}
     </div>
   );
 }
